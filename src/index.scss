@@ -1210,6 +1210,10 @@ $dark-primary: #45205a;
         align-items: center;
         margin: 0 10px;
         font-size: 20px;
+
+        @media screen and (max-width: 380px) {
+          font-size: 15px !important;
+        }
       }
       
       .save-contact{
@@ -1224,6 +1228,11 @@ $dark-primary: #45205a;
         transition: all 0.5s ease;
         color: #fff;
         margin-right: 10px;
+        
+        @media screen and (max-width: 380px) {
+          font-size: 13px !important;
+          min-width: 80px !important;
+        }
         
         &:hover{
           background-color: #252027;
