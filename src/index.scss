@@ -1538,11 +1538,15 @@ $dark-primary: #45205a;
           border-color: #fff3;
 
           .filter{
-            background-color: #fff;
+            // background-color: #fff;
             border-radius: 100px;
+            i{
+              color: #252027;
+              color: #e6deed;
+            }
 
             &:hover{
-              transform: rotate(360deg);
+              background-color: #fff2;
             }
           }
         }
