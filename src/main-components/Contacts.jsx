@@ -72,10 +72,10 @@ function Contacts(props) {
                 <i className="fa-solid fa-star"></i>
             </div>
         </div>
-        <div className="container">
+        {loginContextUsed.user.contacts.length > 0 && <div className="container">
             {contactsEl}
-            {loginContextUsed.user.contacts.length < 1 && <div className='empty'><img src="img/empty-box.png" alt='empty'></img></div>}
-        </div>
+        </div>}
+        {loginContextUsed.user.contacts.length < 1 && <div className='empty'><img src="img/empty-box.png" alt='empty'></img></div>}
       </div>
       <div className="new-contact" onClick={()=>{
         props.toggleNewContact(true)

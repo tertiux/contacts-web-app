@@ -1107,7 +1107,7 @@ $dark-primary: #45205a;
           min-width: 100px;
           transition: all 0.5s ease;
           opacity: 0.6 !important;
-          transform: translateY(-70px);
+          // transform: translateY(-70px);
         }
       }
 
@@ -2170,7 +2170,8 @@ $dark-primary: #45205a;
         transform: translate(10px, -10px) scale(100) !important;
       }
     }
-      .container{
+      
+      .empty{
         img{
           opacity: 0.7;
           filter: invert(10);
