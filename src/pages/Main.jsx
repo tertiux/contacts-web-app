@@ -182,6 +182,8 @@ function Main() {
       <LockScreen checkCode={checkCode} />
       <Search
         toggleSearch={toggleSearch}
+        toggleContact={toggleContact}
+        showContact={showContact}
       />
     </div>
   )

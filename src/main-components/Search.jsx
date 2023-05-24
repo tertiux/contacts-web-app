@@ -1,6 +1,43 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { LoginContext } from '../context/LoginContext'
 
 function Search(props) {
+    const loginContextUsed = useContext(LoginContext)
+    const contactsx = loginContextUsed.user.contacts    
+    const sortedContacts = contactsx.sort((a, b)=>a.name.localeCompare(b.name))
+  const contactsEl = sortedContacts.map((contact)=>{
+    return (
+        <div onClick={()=>{
+            props.toggleContact(true)
+            props.showContact(contact)
+        }} key={contact.id} onContextMenu={()=>{
+            document.querySelectorAll(`.contact`).forEach((guy)=>{
+                guy.classList.remove("hover")
+            })
+            document.querySelector(`.${contact.id}`).classList.add("hover")
+        }} onMouseEnter={(event)=>{
+            event.stopPropagation()
+            document.querySelectorAll(`.contact`).forEach((guy)=>{
+                guy.classList.remove("hover")
+            })
+        }} onMouseOver={(event)=>{
+            event.stopPropagation()
+        }} className={`contact ${contact.isFavorite && "favorite"} ${contact.id}`}>
+            <div className="first-letter">
+                <h2>{contact.name[0]}</h2>
+            </div>
+            <div className="contact-name">
+                {contact.name}
+            </div>
+            <div className="delete-contact" onClick={(event)=>{
+                event.stopPropagation()
+                loginContextUsed.functions.deleteContact(contact)
+            }}>
+                <i className="fa fa-trash"></i>
+            </div>
+        </div> 
+    )
+  })
   return (
     <div className='search-big'>
       <div className="content">
@@ -17,38 +54,7 @@ function Search(props) {
             <div className='search'><i className="fa fa-magnifying-glass"></i></div>
         </div>
         <div className="container">
-            <div className="contact">
-                <div className="first-letter">
-                    B
-                </div>
-                <div className="contact-name">
-                    Bro Emmanuel
-                </div>
-            </div>
-            <div className="contact">
-                <div className="first-letter">
-                    B
-                </div>
-                <div className="contact-name">
-                    Bro Emmanuel
-                </div>
-            </div>
-            <div className="contact">
-                <div className="first-letter">
-                    B
-                </div>
-                <div className="contact-name">
-                    Bro Emmanuel
-                </div>
-            </div>
-            <div className="contact">
-                <div className="first-letter">
-                    B
-                </div>
-                <div className="contact-name">
-                    Bro Emmanuel
-                </div>
-            </div>
+            {contactsEl}
         </div>
       </div>
     </div>
