@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
-function LockScreen(props) {
+function LockScreen({checkCode}) {
     const [passcode, setPassCode] = useState("")
     const [pointerKeys, setPointerKeys] = useState(true)
     useEffect(()=>{
         if (passcode.toString().length >= 4){
-            props.checkCode(passcode)
-            setPointerKeys(false)
-            setTimeout(()=>{
-                setPassCode("")
-                setPointerKeys(true)
-            }, 500)
+            checkCode(passcode)
+            // setPointerKeys(false)
+            setPassCode("")
         } else{
             setPointerKeys(true)
         }
-    }, [passcode, props])
+    }, [passcode, checkCode])
   return (
     <div className='lock-screen'>
       <div className="content">
