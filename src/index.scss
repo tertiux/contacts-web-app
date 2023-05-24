@@ -1218,6 +1218,16 @@ $dark-primary: #45205a;
     opacity: 1;
     background-color: #fff7;
     backdrop-filter: blur(30px);
+
+    .content{
+      .keypad{
+        .keys{
+          .key{
+            background-color: #482c58d3;
+          }
+        }
+      }
+    }
   }
 
   &.show-lock-screen{
