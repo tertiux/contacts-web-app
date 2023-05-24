@@ -5,6 +5,7 @@ import NewContact from '../main-components/NewContact'
 import { LoginContext } from '../context/LoginContext'
 import Contact from '../main-components/Contact'
 import EditContact from '../main-components/EditContact'
+import LockScreen from '../main-components/LockScreen'
 
 function Main() {
   const loginContextUsed = useContext(LoginContext)
@@ -107,9 +108,38 @@ function Main() {
     setContactBigData(contact)
   }
 
+  const [lockScreenData, setLockScreenData] = useState({
+    showLockScreen: true,
+    userPassword: "4722"
+  })
+
+  function showLockScreen(){
+    setLockScreenData((prev)=>{
+      return ({
+        ...prev,
+        showLockScreen: true
+      })
+    })
+  }
+
+  function checkCode(passcode){
+    if(passcode === lockScreenData.userPassword){
+      console.log("successful:", passcode)
+      setLockScreenData((prev)=>{
+        return ({
+          ...prev,
+          showLockScreen: false
+        })
+      })
+    } else{
+      console.log("unsuccessful:", passcode)
+    }
+  }
+
   return (
-    <div className={`main ${mainUi.showMenu && "show-menu"} ${mainUi.showNewContact && "show-new-contact"} ${loginContextUsed.themeData.darkTheme && "dark"} ${mainUi.showContact && "show-contact-big"} ${mainUi.showEditContact && "show-edit-contact"}`}>
+    <div className={`main ${mainUi.showMenu && "show-menu"} ${mainUi.showNewContact && "show-new-contact"} ${loginContextUsed.themeData.darkTheme && "dark"} ${mainUi.showContact && "show-contact-big"} ${mainUi.showEditContact && "show-edit-contact"} ${lockScreenData.showLockScreen && "show-lock-screen"}`}>
       <Contacts
+        showLockScreen={showLockScreen}
         showContact={showContact}
         toggleMenu={toggleMenu}
         toggleNewContact={toggleNewContact}
@@ -138,6 +168,7 @@ function Main() {
           <i className="fa fa-phone fa-beat-fade"></i>
         </div>
       </div>
+      <LockScreen checkCode={checkCode} />
     </div>
   )
 }

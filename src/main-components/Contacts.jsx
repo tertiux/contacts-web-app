@@ -41,7 +41,7 @@ function Contacts(props) {
   return (
     <div className='contacts'>
       <div className="nav">
-        <div className="user-img">
+        <div className="user-img" onClick={props.showLockScreen}>
             <i className="fa fa-lock"></i>
         </div>
 
