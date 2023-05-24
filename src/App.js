@@ -17,7 +17,7 @@ function App() {
       ],
     },
     themeData: {
-      darkTheme: false,
+      darkTheme: true,
       prefersAnimations: true,
     },
     functions: {
