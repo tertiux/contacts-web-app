@@ -1956,6 +1956,25 @@ $dark-primary: #45205a;
       backdrop-filter: blur(30px);
       color: #fff;
 
+      .confirm{
+        background-color: #252027d6;
+        color: #fff;
+
+        .close{
+          &:hover{
+            background-color: #fff1;
+          }
+        }
+
+        p{
+          color: #fff;
+        }
+
+        button:hover{
+          background-color: rgb(54, 54, 150) !important;
+        }
+      }
+
       .content{
         .passcode{
           border-color: #fff2;
