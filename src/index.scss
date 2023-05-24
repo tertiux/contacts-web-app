@@ -147,6 +147,7 @@ $dark-primary: #45205a;
         font-weight: 500;
         height: 50px;
         cursor: pointer;
+        display: none;
 
         &:hover{
           transform: scale(1.03);
