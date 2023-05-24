@@ -3,9 +3,9 @@ import { LoginContext } from '../context/LoginContext'
 
 function Contacts(props) {
   const loginContextUsed = useContext(LoginContext)
-//   console.log(loginContextUsed.user.contacts)
-
-  const contactsEl = loginContextUsed.user.contacts.map((contact)=>{
+    const contactsx = loginContextUsed.user.contacts    
+    const sortedContacts = contactsx.sort((a, b)=>a.name.localeCompare(b.name))
+  const contactsEl = sortedContacts.map((contact)=>{
     return (
         <div onClick={()=>{
             props.toggleContact(true)
