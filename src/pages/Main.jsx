@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useLayoutEffect, useState } from 'react'
 import Contacts from '../main-components/Contacts'
 import MainMenu from '../main-components/MainMenu'
 import NewContact from '../main-components/NewContact'
@@ -20,7 +20,7 @@ function Main() {
     showSearch: false,
     showNewUser: true
   })
-
+  
   function toggleMenu(value){
     setMainUi((prev)=>{
       return ({
@@ -156,6 +156,25 @@ function Main() {
       console.log("unsuccessful:", passcode)
     }
   }
+
+  useLayoutEffect(()=>{
+    const isLoggedIn = window.localStorage.getItem("isLoggedIn")
+    if (isLoggedIn === "true"){
+      setMainUi((prev)=>{
+        return ({
+          ...prev,
+          showNewUser: false
+        })
+      })
+    } else{
+      setMainUi((prev)=>{
+        return ({
+          ...prev,
+          showNewUser: true
+        })
+      })
+    }
+  }, [])
 
   return (
     <div className={`main ${mainUi.showMenu && "show-menu"} ${mainUi.showNewContact && "show-new-contact"} ${mainUi.showNewUser && "show-new-user"} ${loginContextUsed.themeData.darkTheme && "dark"} ${mainUi.showContact && "show-contact-big"} ${mainUi.showEditContact && "show-edit-contact"} ${mainUi.showSearch && "show-search"} ${lockScreenData.showLockScreen && "show-lock-screen"}`}>

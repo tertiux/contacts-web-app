@@ -17,6 +17,7 @@ function App() {
         
       ],
     },
+    skipNewUser: false,
     themeData: {
       darkTheme: true,
       prefersAnimations: true,
@@ -67,6 +68,13 @@ function App() {
     const parsedtheme = JSON.parse(themeToImport)
     if (parsedtheme){
       dispatch({type: "updateThemeFromStorage", target: parsedtheme})
+    } else{
+      // window.localStorage.removeItem("storedContacts")
+    }
+
+    const passcodeToImport = window.localStorage.getItem("userPassCode")
+    if (passcodeToImport){
+      dispatch({type: "updatePassCodeFromStorage", target: passcodeToImport})
     } else{
       // window.localStorage.removeItem("storedContacts")
     }
@@ -121,6 +129,8 @@ function App() {
         })
       case ("setCode"):
         thisContact = action.target
+        window.localStorage.setItem("isLoggedIn", "true")
+        window.localStorage.setItem("userPasscode", thisContact)
         return ({
           ...state,
           user: {
@@ -195,6 +205,15 @@ function App() {
             ]
           }
         })
+      case ("updatePassCodeFromStorage"):
+        var importedCode = action.target
+        return({
+          ...state,
+          user: {
+            ...state.user,
+            userPasscode: importedCode
+          }
+        })
       case ("updateThemeFromStorage"):
         var importedPreference = action.target
         return({
@@ -226,6 +245,7 @@ function App() {
     setTimeout(()=>{
       window.localStorage.setItem("storedContacts", JSON.stringify(loginState.user.contacts))
       window.localStorage.setItem("userPreferences", JSON.stringify(loginState.themeData))
+      window.localStorage.setItem("userPasscode", loginState.user.userPasscode)
     }, 1000)
   })
 

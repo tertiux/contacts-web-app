@@ -148,7 +148,7 @@ function NewUser(props) {
                         </div>
                     </div>
                     <div className="keys">
-                        <div className="key" onClick={()=>{
+                        <div className="key disabled" onClick={()=>{
                             setPassCode((prev)=>{
                                 return (prev)
                             })

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+// import { LoginContext } from '../context/LoginContext'
 
 function LockScreen({checkCode}) {
     const [passcode, setPassCode] = useState("")
@@ -12,8 +13,43 @@ function LockScreen({checkCode}) {
             setPointerKeys(true)
         }
     }, [passcode, checkCode])
+    const [lockScreenUi, setLockScreenUi] = useState({
+        showConfirm: false
+    })
+
+    // const loginContextUsed = useContext(LoginContext)
+
+    function clearData(){
+        // loginContextUsed.functions.reset()
+        window.localStorage.setItem("isLoggedIn", "false")
+        window.localStorage.removeItem("storedContacts")
+        window.localStorage.removeItem("userPasscode")
+        window.localStorage.removeItem("userPreferences")
+        setTimeout(()=>{
+            window.location.reload()
+        }, 700)
+    }
   return (
-    <div className='lock-screen'>
+    <div className={lockScreenUi.showConfirm ? 'lock-screen show-confirm' : 'lock-screen'}>
+        <div className="confirm">
+            <div className="close" onClick={()=>{
+                setLockScreenUi((prev)=>{
+                    return({
+                        ...prev,
+                        showConfirm: false
+                    })
+                })
+            }}>
+                <i className="fa fa-close"></i>
+            </div>
+            <div className="check">
+                <i className="fa fa-triangle-exclamation fa-beat-fade"></i>
+            </div>
+            <p>This action will <span>Clear ALL</span> your contacts.</p>
+            <div className="controls">
+                <button onClick={clearData}>I Know</button>
+            </div>
+        </div>
       <div className="content">
         <div className="heading">
             <i className="fa fa-lock"></i>
@@ -94,8 +130,11 @@ function LockScreen({checkCode}) {
             </div>
             <div className="keys">
                 <div className="key" onClick={()=>{
-                    setPassCode((prev)=>{
-                        return (prev)
+                    setLockScreenUi((prev)=>{
+                        return ({
+                            ...prev,
+                            showConfirm: true
+                        })
                     })
                 }}>
                     <i className="fa fa-question"></i>
