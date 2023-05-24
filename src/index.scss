@@ -631,10 +631,13 @@ $dark-primary: #45205a;
 
     .nav{
       display: flex;
-      max-width: 100%;
+      width: 100%;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
 
       .user-img{
         width: 40px;
@@ -697,12 +700,16 @@ $dark-primary: #45205a;
     .contacts-holder{
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.5s ease;
       .heading{
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 20px;
+        padding-top: 80px;
         border-bottom: 2px solid #e0d9e4;
         transition: all 0.5s ease;
 
@@ -771,17 +778,23 @@ $dark-primary: #45205a;
       }
 
       .container{
-        height: 100%;
+        max-height: 100% !important;
         padding: 30px 20px;
         display: flex;
         flex-direction: column;
         gap: 15px;
+        overflow: hidden;
+        overflow-y: scroll;
+        &::-webkit-scrollbar{
+          width: 0px;
+          height: 0px;
+        }
         
         .contact{
           user-select: none;
           position: relative;
           width: 100%;
-          height: 60px;
+          min-height: 60px;
           background-color: transparent;
           border-radius: 100px;
           overflow: hidden;
@@ -808,7 +821,7 @@ $dark-primary: #45205a;
           .first-letter{
             position: absolute;
             width: 40px;
-            height: 40px;
+            min-height: 40px;
             background-color: tomato;
             border-radius: 100px;
             display: flex;
@@ -1258,6 +1271,7 @@ $dark-primary: #45205a;
         border-radius: 100px;
         transition: all 0.5s ease;
         cursor: pointer;
+        display: none;
         
         &:hover{
           background-color: #0001;
