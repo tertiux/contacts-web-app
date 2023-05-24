@@ -66,7 +66,7 @@ function Contacts(props) {
         </div>
         <div className="container">
             {contactsEl}
-            {loginContextUsed.user.contacts.length < 1 && <div className='empty'><img src="img/sad.gif" alt='empty'></img></div>}
+            {loginContextUsed.user.contacts.length < 1 && <div className='empty'><img src="img/empty-box.png" alt='empty'></img></div>}
         </div>
       </div>
       <div className="new-contact" onClick={()=>{
