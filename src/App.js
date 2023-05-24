@@ -51,7 +51,6 @@ function App() {
   useLayoutEffect(()=>{
     const contactsToImport = window.localStorage.getItem("storedContacts")
     const parsedContacts = JSON.parse(contactsToImport)
-    console.log(contactsToImport, parsedContacts)
     if (parsedContacts){
       if(parsedContacts.length > 0){
         dispatch({type: "updateContactsFromStorage", target: parsedContacts})
@@ -62,7 +61,6 @@ function App() {
 
     const themeToImport = window.localStorage.getItem("userPreferences")
     const parsedtheme = JSON.parse(themeToImport)
-    console.log(contactsToImport, parsedContacts)
     if (parsedtheme){
       dispatch({type: "updateThemeFromStorage", target: parsedtheme})
     } else{
@@ -186,7 +184,6 @@ function App() {
         })
       case ("updateThemeFromStorage"):
         var importedPreference = action.target
-        console.log(importedPreference)
         return({
           ...state,
           themeData: {
