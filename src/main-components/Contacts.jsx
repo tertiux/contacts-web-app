@@ -22,7 +22,7 @@ function Contacts(props) {
             })
         }} onMouseOver={(event)=>{
             event.stopPropagation()
-        }} className={`contact ${contact.id}`}>
+        }} className={`contact ${contact.isFavorite && "favorite"} ${contact.id}`}>
             <div className="first-letter">
                 <h2>{contact.name[0]}</h2>
             </div>
