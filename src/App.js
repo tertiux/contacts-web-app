@@ -49,42 +49,6 @@ function App() {
   }
 
   useLayoutEffect(()=>{
-    // window.localStorage.setItem("storedContacts", JSON.stringify([{
-    //   name: "Bro Emmanuel",
-    //   phone: "08160683442",
-    //   id: "bro08160683442Akaxjaxn",
-    //   email: "emma@gmail.com",
-    //   address: "no 14 behind axax, Nigeria",
-    //   company: "University of Ibadan",
-    //   website: "https://tertiux-linktree.netlify.app",
-    //   linkedin: "https://linkedin.com/in/tertiux44",
-    //   bio: "MLS student at University of Ibadan",
-    //   isFavorite: false,
-    // },
-    // {
-    //   name: "Yusuf Praise",
-    //   phone: "08160683442",
-    //   id: "ysf08160683442Akayjaxn",
-    //   email: "emma@gmail.com",
-    //   address: "no 14 behind axax, Nigeria",
-    //   company: "University of Ibadan",
-    //   website: "https://tertiux-linktree.netlify.app",
-    //   linkedin: "https://linkedin.com/in/tertiux44",
-    //   bio: "MLS student at University of Ibadan",
-    //   isFavorite: false,
-    // },
-    // {
-    //   name: "Consolation Basil",
-    //   phone: "08160683442",
-    //   id: "ysfxxx08160683442Akayjaxn",
-    //   email: "",
-    //   address: "",
-    //   company: "",
-    //   website: "",
-    //   linkedin: "",
-    //   bio: "",
-    //   isFavorite: true,
-    // },]))
     const contactsToImport = window.localStorage.getItem("storedContacts")
     const parsedContacts = JSON.parse(contactsToImport)
     console.log(contactsToImport, parsedContacts)
@@ -92,6 +56,15 @@ function App() {
       if(parsedContacts.length > 0){
         dispatch({type: "updateContactsFromStorage", target: parsedContacts})
       }
+    } else{
+      // window.localStorage.removeItem("storedContacts")
+    }
+
+    const themeToImport = window.localStorage.getItem("userPreferences")
+    const parsedtheme = JSON.parse(themeToImport)
+    console.log(contactsToImport, parsedContacts)
+    if (parsedtheme){
+      dispatch({type: "updateThemeFromStorage", target: parsedtheme})
     } else{
       // window.localStorage.removeItem("storedContacts")
     }
@@ -211,7 +184,15 @@ function App() {
             ]
           }
         })
-        
+      case ("updateThemeFromStorage"):
+        var importedPreference = action.target
+        console.log(importedPreference)
+        return({
+          ...state,
+          themeData: {
+            ...importedPreference
+          }
+        })
       // break
       default:
         return({
@@ -234,7 +215,7 @@ function App() {
   useEffect(()=>{
     setTimeout(()=>{
       window.localStorage.setItem("storedContacts", JSON.stringify(loginState.user.contacts))
-      console.log("Done")
+      window.localStorage.setItem("userPreferences", JSON.stringify(loginState.themeData))
     }, 1000)
   })
 
