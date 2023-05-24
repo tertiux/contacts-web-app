@@ -1499,17 +1499,6 @@ $dark-primary: #45205a;
         pointer-events: all;
       }
     }
-
-    .contacts{
-      .nav{
-        .user-img{
-          i{
-            transform: scaleX(0.5);
-            transition: all 0.3s ease;
-          }
-        }
-      }
-    }
   }
 
   .preloader{
