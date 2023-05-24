@@ -48,7 +48,7 @@ function App() {
     }
   }
 
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     // window.localStorage.setItem("storedContacts", JSON.stringify([{
     //   name: "Bro Emmanuel",
     //   phone: "08160683442",
