@@ -6,6 +6,7 @@ import { LoginContext } from '../context/LoginContext'
 import Contact from '../main-components/Contact'
 import EditContact from '../main-components/EditContact'
 import LockScreen from '../main-components/LockScreen'
+import Search from '../main-components/Search'
 
 function Main() {
   const loginContextUsed = useContext(LoginContext)
@@ -14,7 +15,8 @@ function Main() {
     showNewContact: false,
     showAcct: false,
     showContact: false,
-    showEditContact: false
+    showEditContact: false,
+    showSearch: false
   })
 
   function toggleMenu(value){
@@ -122,6 +124,15 @@ function Main() {
     })
   }
 
+  function toggleSearch(value){
+    setMainUi((prev)=>{
+      return ({
+        ...prev,
+        showSearch: value
+      })
+    })
+  }
+
   const checkCode = (passcode)=>{
     if(passcode === lockScreenData.userPassword){
       setLockScreenData((prev)=>{
@@ -136,8 +147,9 @@ function Main() {
   }
 
   return (
-    <div className={`main ${mainUi.showMenu && "show-menu"} ${mainUi.showNewContact && "show-new-contact"} ${loginContextUsed.themeData.darkTheme && "dark"} ${mainUi.showContact && "show-contact-big"} ${mainUi.showEditContact && "show-edit-contact"} ${lockScreenData.showLockScreen && "show-lock-screen"}`}>
+    <div className={`main ${mainUi.showMenu && "show-menu"} ${mainUi.showNewContact && "show-new-contact"} ${loginContextUsed.themeData.darkTheme && "dark"} ${mainUi.showContact && "show-contact-big"} ${mainUi.showEditContact && "show-edit-contact"} ${mainUi.showSearch && "show-search"} ${lockScreenData.showLockScreen && "show-lock-screen"}`}>
       <Contacts
+        toggleSearch={toggleSearch}
         showLockScreen={showLockScreen}
         showContact={showContact}
         toggleMenu={toggleMenu}
@@ -168,6 +180,9 @@ function Main() {
         </div>
       </div>
       <LockScreen checkCode={checkCode} />
+      <Search
+        toggleSearch={toggleSearch}
+      />
     </div>
   )
 }

@@ -47,7 +47,9 @@ function Contacts(props) {
         </div>
 
         <div className="extras">
-            <div className="search">
+            <div className="search" onClick={()=>{
+                props.toggleSearch(true)
+            }}>
                 <i className="fa fa-magnifying-glass"></i>
             </div>
             <div className="hamburger" onClick={()=>{
