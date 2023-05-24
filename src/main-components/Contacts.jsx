@@ -38,7 +38,7 @@ function Contacts(props) {
         </div> 
     )
   })
-  const [sortFavorites, setSortFavorites] = useState(true)
+  const [sortFavorites, setSortFavorites] = useState(false)
   return (
     <div className={sortFavorites ? 'contacts favoritesOnly' : 'contacts'}>
       <div className="nav">
