@@ -22,6 +22,9 @@ function App() {
       prefersAnimations: true,
     },
     functions: {
+      setCode: (passcode)=>{
+        dispatch({type: "setCode", target: passcode})
+      },
       addContact: (contactDetails)=>{
         dispatch({type: "addContact", target:  contactDetails})
       },
@@ -114,6 +117,15 @@ function App() {
             contacts: [
               ...tempContacts,
             ]
+          }
+        })
+      case ("setCode"):
+        thisContact = action.target
+        return ({
+          ...state,
+          user: {
+            ...state.user,
+            userPasscode: thisContact.toString(),
           }
         })
       case ("toggleFavoriteFalse"):
