@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useLayoutEffect, useReducer } from 'react';
 import './index.scss';
 import Main from './pages/Main';
 import { LoginContext } from './context/LoginContext';
@@ -13,42 +13,7 @@ function App() {
       userEmail: "isaacadebayo@email.com",
       userPassword: "abcd4722",
       contacts: [
-        {
-          name: "Bro Emmanuel",
-          phone: "08160683442",
-          id: "bro08160683442Akaxjaxn",
-          email: "emma@gmail.com",
-          address: "no 14 behind axax, Nigeria",
-          company: "University of Ibadan",
-          website: "https://tertiux-linktree.netlify.app",
-          linkedin: "https://linkedin.com/in/tertiux44",
-          bio: "MLS student at University of Ibadan",
-          isFavorite: false,
-        },
-        {
-          name: "Yusuf Praise",
-          phone: "08160683442",
-          id: "ysf08160683442Akayjaxn",
-          email: "emma@gmail.com",
-          address: "no 14 behind axax, Nigeria",
-          company: "University of Ibadan",
-          website: "https://tertiux-linktree.netlify.app",
-          linkedin: "https://linkedin.com/in/tertiux44",
-          bio: "MLS student at University of Ibadan",
-          isFavorite: false,
-        },
-        {
-          name: "Consolation Basil",
-          phone: "08160683442",
-          id: "ysfxxx08160683442Akayjaxn",
-          email: "",
-          address: "",
-          company: "",
-          website: "",
-          linkedin: "",
-          bio: "",
-          isFavorite: true,
-        },
+        
       ],
     },
     themeData: {
@@ -82,6 +47,55 @@ function App() {
       },
     }
   }
+
+  useEffect(()=>{
+    // window.localStorage.setItem("storedContacts", JSON.stringify([{
+    //   name: "Bro Emmanuel",
+    //   phone: "08160683442",
+    //   id: "bro08160683442Akaxjaxn",
+    //   email: "emma@gmail.com",
+    //   address: "no 14 behind axax, Nigeria",
+    //   company: "University of Ibadan",
+    //   website: "https://tertiux-linktree.netlify.app",
+    //   linkedin: "https://linkedin.com/in/tertiux44",
+    //   bio: "MLS student at University of Ibadan",
+    //   isFavorite: false,
+    // },
+    // {
+    //   name: "Yusuf Praise",
+    //   phone: "08160683442",
+    //   id: "ysf08160683442Akayjaxn",
+    //   email: "emma@gmail.com",
+    //   address: "no 14 behind axax, Nigeria",
+    //   company: "University of Ibadan",
+    //   website: "https://tertiux-linktree.netlify.app",
+    //   linkedin: "https://linkedin.com/in/tertiux44",
+    //   bio: "MLS student at University of Ibadan",
+    //   isFavorite: false,
+    // },
+    // {
+    //   name: "Consolation Basil",
+    //   phone: "08160683442",
+    //   id: "ysfxxx08160683442Akayjaxn",
+    //   email: "",
+    //   address: "",
+    //   company: "",
+    //   website: "",
+    //   linkedin: "",
+    //   bio: "",
+    //   isFavorite: true,
+    // },]))
+    const contactsToImport = window.localStorage.getItem("storedContacts")
+    const parsedContacts = JSON.parse(contactsToImport)
+    console.log(contactsToImport, parsedContacts)
+    if (parsedContacts){
+      if(parsedContacts.length > 0){
+        dispatch({type: "updateContactsFromStorage", target: parsedContacts})
+      }
+    } else{
+      // window.localStorage.removeItem("storedContacts")
+    }
+  }, [])
 
   function changeSomething(state, action){
     switch (action.type){
@@ -186,6 +200,18 @@ function App() {
             ]
           }
         })
+      case ("updateContactsFromStorage"):
+        var imported = action.target
+        return({
+          ...state,
+          user: {
+            ...state.user,
+            contacts: [
+              ...imported
+            ]
+          }
+        })
+        
       // break
       default:
         return({
@@ -204,6 +230,13 @@ function App() {
     })
     })
   }, [])
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      window.localStorage.setItem("storedContacts", JSON.stringify(loginState.user.contacts))
+      console.log("Done")
+    }, 1000)
+  })
 
   const [loginState, dispatch] = useReducer(changeSomething, initialState)
 
