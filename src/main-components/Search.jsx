@@ -1,10 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { LoginContext } from '../context/LoginContext'
 
 function Search(props) {
+    const [searchValue, setSearchValue] = useState("a")
     const loginContextUsed = useContext(LoginContext)
-    const contactsx = loginContextUsed.user.contacts    
-    const sortedContacts = contactsx.sort((a, b)=>a.name.localeCompare(b.name))
+    const contactsx = loginContextUsed.user.contacts
+    const searchedContacts = contactsx.filter((item)=>{
+        return (item.name.toLowerCase().includes(searchValue.toLowerCase()))
+    })    
+    const sortedContacts = searchedContacts.sort((a, b)=>a.name.localeCompare(b.name))
   const contactsEl = sortedContacts.map((contact)=>{
     return (
         <div onClick={()=>{
@@ -38,6 +42,12 @@ function Search(props) {
         </div> 
     )
   })
+
+  function handleSubmit(event){
+    event.preventDefault()
+    console.log(searchValue)
+  }
+
   return (
     <div className='search-big'>
       <div className="content">
@@ -47,11 +57,15 @@ function Search(props) {
             }}>
                 <i className="fa fa-arrow-left"></i>
             </div>
-            <form>
-                <input type="search" minLength={"1"} required maxLength={"20"} placeholder='Search Contacts' />
+            <form onSubmit={handleSubmit}>
+                <input value={searchValue} onChange={(event)=>{
+                    setSearchValue(event.target.value)
+                }} type="search" minLength={"1"} required maxLength={"20"} placeholder='Search Contacts' />
                 <button style={{display: "none"}} id='search-btn'>Search</button>
             </form>
-            <div className='search'><i className="fa fa-magnifying-glass"></i></div>
+            <div className='search' onClick={()=>{
+                document.getElementById("search-btn").click()
+            }}><i className="fa fa-magnifying-glass"></i></div>
         </div>
         <div className="container">
             {contactsEl}
