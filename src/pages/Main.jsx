@@ -134,7 +134,7 @@ function Main() {
   }
 
   const checkCode = (passcode)=>{
-    if(passcode === lockScreenData.userPassword){
+    if(passcode === loginContextUsed.user.userPasscode){
       setLockScreenData((prev)=>{
         return ({
           ...prev,
