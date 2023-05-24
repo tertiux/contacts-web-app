@@ -35,6 +35,7 @@ $dark-primary: #45205a;
     width: 100%;
     height: 100%;
     z-index: 99;
+    opacity: 0;
     background-color: #252027;
     color: #fff;
     background-color: #fbf7fe;
@@ -1213,9 +1214,16 @@ $dark-primary: #45205a;
     }
   }
 
+  .lock-screen{
+    opacity: 1;
+    background-color: #fff7;
+    backdrop-filter: blur(30px);
+  }
+
   &.show-lock-screen{
     .lock-screen{
       transform: translateY(0);
+      opacity: 1;
 
       .passcode{
         opacity: 1;
@@ -1246,7 +1254,8 @@ $dark-primary: #45205a;
     }
 
     .lock-screen{
-      background-color: #252027;
+      background-color: #252027dd;
+      backdrop-filter: blur(30px);
       color: #fff;
 
       .content{
