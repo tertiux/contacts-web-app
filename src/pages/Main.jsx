@@ -132,6 +132,12 @@ function Main() {
       <div className="backdrop" onClick={()=>{
         toggleMenu(false)
       }}></div>
+      <div className="preloader">
+        <div className="preloader-circle">
+          <div className="dot"></div>
+          <i className="fa fa-phone fa-beat-fade"></i>
+        </div>
+      </div>
     </div>
   )
 }
