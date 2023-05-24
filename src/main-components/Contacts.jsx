@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { LoginContext } from '../context/LoginContext'
 
 function Contacts(props) {
@@ -38,8 +38,9 @@ function Contacts(props) {
         </div> 
     )
   })
+  const [sortFavorites, setSortFavorites] = useState(true)
   return (
-    <div className='contacts'>
+    <div className={sortFavorites ? 'contacts favoritesOnly' : 'contacts'}>
       <div className="nav">
         <div className="user-img" onClick={props.showLockScreen}>
             <i className="fa fa-lock-open"></i>
@@ -59,9 +60,14 @@ function Contacts(props) {
 
       <div className="contacts-holder">
         <div className="heading">
-            <h3>ALL CONTACTS</h3>
-            <div className="filter">
-                <img src="img/sort.png" alt="order" />
+            <h3>{sortFavorites ? "FAVORITES" : "ALL CONTACTS"}</h3>
+            <div className="filter" onClick={()=>{
+                setSortFavorites((prev)=>{
+                    return !prev
+                })
+            }}>
+                <i className="fa-solid fa-arrow-down-a-z"></i>
+                <i className="fa-solid fa-star"></i>
             </div>
         </div>
         <div className="container">

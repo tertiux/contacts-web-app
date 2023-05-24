@@ -521,23 +521,35 @@ $dark-primary: #45205a;
         transition: all 0.5s ease;
 
         .filter{
-          width: 40px;
-          height: 40px;
+          width: 45px;
+          height: 45px;
           display: flex;
           justify-content: center;
           align-items: center;
           transition: all 0.5s ease;
           cursor: pointer;
           border-radius: 50%;
+          position: relative;
 
           &:hover{
             background-color: #0001;
           }
-        }
 
-        img{
-          width: 30px;
-          transform: rotate(90deg);
+          i{
+            position: absolute;
+            transition: all 0.5s ease;
+            font-size: 20px;
+
+            &:first-child{
+              opacity: 1;
+              transform: scale(1);
+            }
+
+            &:last-child{
+              opacity: 0;
+              transform: scale(0);
+            }
+          }
         }
       }
 
@@ -672,6 +684,28 @@ $dark-primary: #45205a;
 
       &:hover{
         border-radius: 50%;
+      }
+    }
+
+    &.favoritesOnly{
+      .filter{
+        i{
+          &:first-child{
+            opacity: 0 !important;
+            transform: scale(0) !important;
+          }
+          &:last-child{
+            opacity: 1 !important;
+            transform: scale(1) !important;
+          }
+        }
+      }
+      
+      .contact{
+        display: none !important;
+        &.favorite{
+          display: flex !important;
+        }
       }
     }
   }
