@@ -72,7 +72,7 @@ function App() {
       // window.localStorage.removeItem("storedContacts")
     }
 
-    const passcodeToImport = window.localStorage.getItem("userPassCode")
+    const passcodeToImport = window.localStorage.getItem("userPasscode")
     if (passcodeToImport){
       dispatch({type: "updatePassCodeFromStorage", target: passcodeToImport})
     } else{

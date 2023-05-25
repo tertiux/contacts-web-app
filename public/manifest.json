@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "XO contacts",
+  "name": "XO-contacts web app by Isaac Adebayo",
   "icons": [
     {
       "src": "logo64.png",

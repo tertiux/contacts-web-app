@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { LoginContext } from '../context/LoginContext'
 
 function Search(props) {
-    const [searchValue, setSearchValue] = useState("a")
+    const [searchValue, setSearchValue] = useState("")
     const loginContextUsed = useContext(LoginContext)
     const contactsx = loginContextUsed.user.contacts
     const searchedContacts = contactsx.filter((item)=>{
